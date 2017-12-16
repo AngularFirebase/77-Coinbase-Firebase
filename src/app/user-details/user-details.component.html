@@ -1,0 +1,19 @@
+<div *ngIf="auth.user | async as user; else login">
+   <h3>You are logged into Firebase via Coinbase! UID: {{ user.uid }} </h3>
+   <button (click)="getWallet()"    class="button is-warning">Get Bitcoin Wallet</button>
+   <button (click)="auth.signout()" class="button">Signout</button>
+
+   <div *ngFor="let wallet of wallets | async">
+       <h1>{{ wallet.name }} - {{ wallet.id }}</h1>
+
+       <h3>Current Balance: {{ wallet.balance.amount }} {{ wallet.balance.currency }}</h3>
+     
+    </div>
+</div>
+
+
+
+
+<ng-template #login>
+    <button (click)="auth.login()" class="button is-info">Login with Coinbase</button>
+</ng-template>
